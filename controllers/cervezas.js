@@ -2,7 +2,14 @@ const db = require('../models/db')
 const { response, request } = require('express');
 const Cerveza = require('../models/cerveza');
 function getBeers(req, res) {
-    res.json(db.cervezas.find())
+    const {Nombre, Envase} = req.query
+    const query = {Nombre, Envase}
+    for (const key in query) {
+        if (query[key] === undefined) {
+          delete query[key];
+        }
+      }
+    res.json(db.cervezas.find(query))
 }
 
 function getBeer(req = request, res = response) {
