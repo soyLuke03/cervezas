@@ -1,7 +1,7 @@
 const db = require('../models/db')
 const { response, request } = require('express');
 const Cerveza = require('../models/cerveza');
-function getBeers(req, res) {
+async function getBeers(req, res) {
     const {Nombre, Envase} = req.query
     const query = {Nombre, Envase}
     for (const key in query) {
@@ -9,7 +9,9 @@ function getBeers(req, res) {
           delete query[key];
         }
       }
-    res.json(db.cervezas.find(query))
+    // res.json(db.cervezas.find(query))
+    const cervezas = await Cerveza.find(query)
+    res.json(cervezas)
 }
 
 function getBeer(req = request, res = response) {
