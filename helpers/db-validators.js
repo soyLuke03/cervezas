@@ -8,7 +8,7 @@ const isValidRol = async (rol = '')=> {
 		  }
 }
 
-const existEmail = async (email) => {
+const existsEmail = async (email) => {
 
 	const emailDb = await User.findOne({ email});
 		if (emailDb) {
@@ -23,4 +23,4 @@ const existsUser = async (id) => {
 	}
 }
 
-module.exports = { isValidRol, existEmail, existsUser}
+module.exports = { isValidRol, existsEmail, existsUser}
