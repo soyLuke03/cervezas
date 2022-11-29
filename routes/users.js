@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { addUser, getUsers, delUser} = require('../controllers/users')
+const { addUser, getUsers, delUser, updateUser} = require('../controllers/users')
 const { check } = require('express-validator')
 const { validateFields } = require('../helpers/validate-fields')
 const { isValidRol, existsEmail, existsUser } = require('../helpers/db-validators')
@@ -22,6 +22,14 @@ router.delete('/:id', [
     check('id').custom(existsUser),
     validateFields
 ],delUser)
-// router.put('/:id', editUser)
+router.put('/:id', [
+    check('id','No es un id correcto').isMongoId(),
+    check('id').custom(existsUser),
+    check('password', 'El password debe de ser más de 6 letras').isLength({ min: 6, max: 12 }),
+    check('name','Name is mandatory').not().isEmpty(),
+    check('rol').custom( isValidRol),
+    validateFields
+]
+,updateUser)
 
 module.exports = router

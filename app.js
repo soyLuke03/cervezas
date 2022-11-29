@@ -7,7 +7,7 @@ const app = express()
 // require('./db')
 const cervezas = require('./routes/cervezas')
 const users = require('./routes/users')
-
+const auth = require('./routes/auth')
 // DATABASE CONNECTION
 async function connectAtlas(){
     await dbConnection()
@@ -19,7 +19,7 @@ app.use(express.json())
 //ROUTES
 app.use('/cervezas', cervezas)
 app.use('/users', users)
-
+app.use('/auth', auth)
 
 
 app.listen(process.env.PORT)
