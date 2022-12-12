@@ -42,7 +42,8 @@ const updateUser = async (req = request, res = response) => {
 const delUser = async(req = request, res= response) => {
     const id = req.params.id;
     const user = await User.findByIdAndUpdate(id, {"state": false})
-    res.json(user)
+    const authenticatedUser = req.user
+    res.json({ user, authenticatedUser})
 }
 
 module.exports = {addUser, getUsers,delUser, updateUser}
