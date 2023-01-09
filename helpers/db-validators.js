@@ -23,4 +23,6 @@ const existsUser = async (id) => {
 	}
 }
 
+
+
 module.exports = { isValidRol, existsEmail, existsUser}
